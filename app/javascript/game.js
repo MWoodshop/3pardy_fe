@@ -1,17 +1,32 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".card");
+var $cell = $('.card');
 
-    cards.forEach((card) => {
-      const userInput = card.querySelector('.user-input');
-      userInput.style.display = 'none'; // Initially hide the input box and button
+//open and close card when clicked on card
+$cell.find('.js-expander').click(function() {
 
-      card.addEventListener("click", function () {
-        card.classList.toggle("flipped");
-        if (card.classList.contains("flipped")) {
-          userInput.style.display = 'block'; // Show the input box and button when card is flipped
-        } else {
-          userInput.style.display = 'none'; // Hide the input box and button when card is unflipped
-        }
-      });
-    });
-  });
+  var $thisCell = $(this).closest('.card');
+
+  if ($thisCell.hasClass('is-collapsed')) {
+    $cell.not($thisCell).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
+    $thisCell.removeClass('is-collapsed').addClass('is-expanded');
+
+    if ($cell.not($thisCell).hasClass('is-inactive')) {
+      //do nothing
+    } else {
+      $cell.not($thisCell).addClass('is-inactive');
+    }
+
+  } else {
+    $thisCell.removeClass('is-expanded').addClass('is-collapsed');
+    $cell.not($thisCell).removeClass('is-inactive');
+  }
+});
+
+//close card when click on cross
+$cell.find('.js-collapser').click(function() {
+
+  var $thisCell = $(this).closest('.card');
+
+  $thisCell.removeClass('is-expanded').addClass('is-collapsed');
+  $cell.not($thisCell).removeClass('is-inactive');
+
+});
