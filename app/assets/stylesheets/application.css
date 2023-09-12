@@ -17,6 +17,8 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 200px);
     gap: 10px;
+    max-width: 620px;
+margin: 0 auto;
   }
 
   .category-name {
