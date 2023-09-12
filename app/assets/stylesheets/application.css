@@ -1,99 +1,147 @@
 body {
-        background-color: #111827;
+  background-color: #111827;
 }
 
 .card {
-    width: 200px;
-    height: 200px;
-    perspective: 1000px;
-    position: relative;
-    border: none; /* Added */
-    outline: none; /* Added */
-    margin: 0;
-    padding: 0;
-  }
+width: 200px;
+height: 200px;
+perspective: 1000px;
+position: relative;
+border: none; /* Added */
+outline: none; /* Added */
+margin: 0;
+padding: 0;
+transition: all 0.5s ease;
 
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(3, 200px);
-    gap: 10px;
-    max-width: 620px;
+}
+
+.card-container {
+display: grid;
+grid-template-columns: repeat(3, 200px);
+gap: 10px;
+max-width: 620px;
 margin: 0 auto;
-  }
+position: relative;  /* New line */
+}
 
-  .category-name {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    grid-column-end: span 1;
-    color: white;
-  }
+.card-container.dimmed::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 1; /* Make sure this layer is below the expanded card but above the others */
+}
+
+.card-container.dimmed {
+background-color: rgba(0, 0, 0, 0.5); /* Dimming effect */
+transition: background-color 0.5s;   /* Optional: smooth transition */
+}
+
+.card-container.dimmed > .card:not(.expanded) {
+  background-color: rgba(0, 0, 0, 0.5); /* This part */
+  z-index: 1;
+}
+
+.card.expanded {
+z-index: 2; /* Makes sure the expanded card is above other cards */
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) scale(2.5);
+z-index: 2;
+grid-column-end: span 3;    /* To make it cover 3 columns */
+grid-row-end: span 3;      /* To make it cover 3 rows */
+transform: scale(2.5);     /* To make the card grow 2.5 times */
+transition: transform 0.5s;  /* Optional: smooth transition */
+}
+
+.card.expanded .card-front, .card.expanded .card-back {
+font-size: 12px;
+}
+
+.card.expanded .user-input input, .card.expanded .user-input button {
+font-size: 10px;
+}
 
 
-  .card-front{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    transition: transform 0.5s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-    border: none;
-    outline: none;
-    margin: 0;
-    padding: 0;
-  }
+.category-name {
+font-size: 24px;
+font-weight: bold;
+text-align: center;
+grid-column-end: span 1;
+color: white;
+}
 
-  .card-back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    transition: transform 0.5s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    outline: none;
-    margin: 0;
-    padding: 0;
-  }
 
-  .card-front {
-    background: #1B2533;
-    color: white;
-  }
+.card-front{
+width: 100%;
+height: 100%;
+position: absolute;
+backface-visibility: hidden;
+transition: transform 0.5s;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 24px;
+font-weight: bold;
+border: none;
+outline: none;
+margin: 0;
+padding: 0;
+}
 
-  .card-back {
-    background: #5592DE;
-    color: white;
-    transform: rotateY(180deg);
-  }
+.card-back {
+width: 100%;
+height: 100%;
+position: absolute;
+backface-visibility: hidden;
+transition: transform 0.5s;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+border: none;
+outline: none;
+margin: 0;
+padding: 0;
+}
 
-  .card.flipped .card-front {
-    transform: rotateY(180deg);
-  }
+.card-front {
+background: #1B2533;
+color: white;
+}
 
-  .card.flipped .card-back {
-    transform: rotateY(0);
-  }
+.card-back {
+background: #5592DE;
+color: white;
+transform: rotateY(180deg);
+}
 
-  .user-input {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.card.flipped .card-front {
+transform: rotateY(180deg);
+}
 
-  .user-input input {
-    margin-right: 10px;
-  }
+.card.flipped .card-back {
+transform: rotateY(0);
+}
 
-  .button {
-    align-items: center;
-  }
+.user-input {
+position: absolute;
+bottom: 10px;
+left: 50%;
+transform: translateX(-50%);
+text-align: center;
+}
+
+.user-input input {
+margin-right: 10px;
+}
+
+.button {
+align-items: center;
+display: block; /* Make the button a block-level element */
+margin: 0 auto; /* Center-align the button horizontally within the .user-input div */
+}
