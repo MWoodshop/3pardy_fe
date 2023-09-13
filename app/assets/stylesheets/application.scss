@@ -1,7 +1,7 @@
 // Basic styles.
 
 body {
-	background-color: #fff;
+	background-color: #000523;
 	color: #333;
 	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 	font-size: 100%;
@@ -15,8 +15,8 @@ body {
 
 // Styles for our expanding grid.
 
-$image-bg-color: orange;
-$expanded-area-bg-color: #888;
+$image-bg-color: rgb(0, 35, 100);
+$expanded-area-bg-color: #00223c;
 
 .expanding-grid {
 	position: relative;
