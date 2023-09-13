@@ -1,0 +1,164 @@
+// Basic styles.
+
+body {
+	background-color: #fff;
+	color: #333;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 100%;
+	font-weight: 400;
+	line-height: 1.5;
+	margin: 0 auto;
+	max-width: 80em;
+	overflow-y: scroll; // Permanent scroll bar.
+	padding: 2em;
+}
+
+// Styles for our expanding grid.
+
+$image-bg-color: orange;
+$expanded-area-bg-color: #888;
+
+.expanding-grid {
+	position: relative;
+	width: 100%;
+	.links {
+		display: block;
+		margin: 0 -1em;
+		overflow: hidden; // Clearfix.
+		padding: 1em 0;
+		> li {
+			box-sizing: border-box;
+			float: left;
+			padding: 1em;
+			a {
+				background: $image-bg-color;
+				color: #fff;
+				display: block;
+				font-size: 2em;
+				line-height: 1;
+				padding: 25% 1em;
+				position: relative;
+				text-align: center;
+				text-decoration: none;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				&:hover {
+					background: lighten($image-bg-color, 10%);
+				}
+				&.active {
+					background: darken($image-bg-color, 10%);
+					&:after {
+						background-color: transparent;
+						border-bottom: 0.375em solid $expanded-area-bg-color;
+						border-left: 0.375em solid transparent;
+						border-right: 0.375em solid transparent;
+						bottom: -0.5em;
+						content: '';
+						height: 0;
+						left: 50%;
+						margin-left: -0.375em;
+						position: absolute;
+						width: 0;
+					}
+				}
+			}
+			@media only screen and (max-width: 39.99em) {
+				width: 50%;
+				&:nth-of-type(2n+1) {
+					clear: left;
+				}
+			}
+			@media only screen and (min-width: 40em) and (max-width: 59.99em) {
+				width: percentage(1/3);
+				&:nth-of-type(3n+1) {
+					clear: left;
+				}
+			}
+			@media only screen and (min-width: 60em) {
+				width: percentage(1/4);
+				&:nth-of-type(4n+1) {
+					clear: left;
+				}
+			}
+		}
+	}
+
+	.spacer {
+		background-color: $expanded-area-bg-color;
+		clear: both;
+		display: block;
+		margin: 0 1em;
+	}
+
+	.expanding-container {
+		clear: both;
+		display: none;
+		overflow: hidden;
+		width: 100%;
+		&.expanded,
+		&:target {
+			display: block;
+		}
+	}
+
+	.hentry {
+		background: $expanded-area-bg-color;
+		box-sizing: border-box;
+		clear: both;
+		color: #fff;
+		min-height: 4em;
+		overflow: hidden; // Clearfix.
+		padding: 2em;
+		width: 100%;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		.entry-image {
+			box-sizing: border-box;
+			float: right;
+			margin-left: 1em;
+			padding: 0.25em 0 0.52em 1em;
+			text-align: center;
+			width: 50%;
+		}
+		.entry-title {
+			font-size: 1.5em;
+		}
+	}
+
+	.close-button {
+		background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBkPSJNLjcuN2wxOCAxOG0tMTggMGwxOC0xOCIvPjwvc3ZnPg==) no-repeat scroll 50% 50% transparent;
+		color: #fff;
+		display: inline-block;
+		height: 20px;
+		line-height: 1;
+		overflow: hidden;
+		padding: 1.5em 2em;
+		text-decoration: none;
+		text-indent: 5em;
+		white-space: nowrap;
+		width: 20px;
+		will-change: opacity;
+		z-index: 5;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		&.active {
+			transition: opacity 0.2s;
+		}
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+}
+
+// Style our simulated images.
+
+.img-placeholder {
+	background: $image-bg-color;
+	color: #fff;
+	font-size: 4em;
+	font-weight: 300;
+	line-height: 1;
+	padding: 25% 0.25em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
